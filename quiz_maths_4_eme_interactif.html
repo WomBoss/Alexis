@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Maths 4ème</title>
+<style>
+body{
+  font-family:Arial;
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+.card{
+  background:#1f2937;
+  padding:20px;
+  border-radius:15px;
+  max-width:500px;
+  margin:auto;
+}
+button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+}
+button:hover{
+  background:#1d4ed8;
+}
+#score{
+  margin-top:15px;
+  font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<h1>🧠 Quiz Maths 4ème</h1>
+
+<div class="card">
+  <div id="question">Chargement...</div>
+  <div id="answers"></div>
+  <div id="score"></div>
+</div>
+
+<script>
+const quiz = [
+  {
+    q:"Fractions : 1/2 + 1/2 = ?",
+    a:["1","2","1/4","0"],
+    correct:0
+  },
+  {
+    q:"Pythagore : formule ?",
+    a:["a+b=c","a²+b²=c²","a×b=c","a²-b²=c²"],
+    correct:1
+  },
+  {
+    q:"2x + 3 = 11 → x = ?",
+    a:["3","4","5","6"],
+    correct:1
+  }
+];
+
+let index = 0;
+let score = 0;
+
+function showQ(){
+  if(index >= quiz.length){
+    document.getElementById("question").innerHTML="Terminé 🎉";
+    document.getElementById("answers").innerHTML="";
+    document.getElementById("score").innerHTML="Score : " + score + "/" + quiz.length;
+    return;
+  }
+
+  let q = quiz[index];
+  document.getElementById("question").innerHTML = q.q;
+
+  let html="";
+  q.a.forEach((ans,i)=>{
+    html += `<button onclick=check(${i})>${ans}</button>`;
+  });
+  document.getElementById("answers").innerHTML = html;
+}
+
+function check(i){
+  if(i === quiz[index].correct){
+    score++;
+  }
+  index++;
+  showQ();
+}
+
+showQ();
+</script>
+
+</body>
+</html>
